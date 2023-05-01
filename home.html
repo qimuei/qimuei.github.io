@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>成航搜索 by 成航工作室</title>
+    <style>
+		<img src="图片的路径（相对路径）"width="" height="">
+        *{
+            font-family: "Microsoft Yahei","Inconsolata","Courier";
+            font-weight: 400;
+            outline: none;
+            border: none;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        #main-holder{
+            position: absolute;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            z-index: 1;
+        }
+        #main-over-top{
+            height: 72px;
+            box-sizing: border-box;
+        }
+        #main-header{
+            font-weight: 100;
+            color: rgb(0,125,248);
+            font-size: 2em;
+            text-align: center;
+            margin: auto;
+        }
+        #main-large-search{
+            height: 180px;
+            box-sizing: border-box;
+        }
+        #search_form{
+            position: relative;
+            top: 1px;
+            transition: ease-out top .2s;
+            height: 42px;
+            min-width: 580px;
+            width: 40%;
+            margin: auto;
+            text-align: center;
+        }
+        #search_box{
+            height: 42px;
+            width: 100%;
+            display: block;
+            margin-top: .6em;
+            border-radius: 12px;
+            border: 1.5px solid rgb(0,181,173);
+            color: rgb(0,11,173);
+            padding-left: 12px;
+            padding-right: 96px;
+            box-sizing: border-box;
+            font-weight: 400;
+            outline: none;
+            transition: ease-out padding-right .2s,ease-out border-radius .2s;
+            z-index: 1;
+        }
+        #search_btn{
+            background-color: rgb(0,124,248);
+            border-color: rgb(0,181,173);
+            color: rgb(248,248,248);
+            height: 42px;
+            width: 88px;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            border: 1.5px solid rgb(0,0,0);
+            box-sizing: border-box;
+            font-weight: 400;
+            border-radius: 0px 12px 12px 0px;
+            transition: ease-out background-color .1s,ease-out width .2s,ease-out border-radius .2s;
+            z-index: 2;
+            cursor: pointer;
+        }
+        #search_btn:hover{
+            background-color: rgb(0,163,248);
+            border-color: rgb(0,248,248);
+            color: rgb(248,228,228);
+            width: 108px;
+        }
+        #search_form:focus-within{
+            top: -2px;
+        }
+        #search_form:focus-within>#search_btn{
+            width: 108px;
+            border-radius: 0px 21px 21px 0px;
+        }
+        #search_form:focus-within>#search_box{
+            padding-right: 116px;
+            border-radius: 21px;
+        }
+        #search_btn:hover+#search_box{
+            padding-right: 116px;
+        }
+        #search_btn:active{
+            background-color: rgb(0,125,248)!important;
+        }
+        #search_box::-moz-placeholder{
+            color: rgb(0,145,248);
+        }
+    </style>
+</head>
+<body>
+    <div id="main-holder">
+        <div id="main-large-search">
+            <div id="main-over-top"></div>
+            <h1 id="main-header">成航搜索</h1>
+            <div class="holders" id="search_form">
+                <button id="search_btn">成航一下</button>
+                <input id="search_box" name="search_box" placeholder="本网页仅供成航工作室陈楷、廖一航本地开发测试" autocomplete="off" />
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    BASE_URL = 'https://www.baidu.com/s?wd=%KW%&ie=UTF-8';
+    var encode = function (url) {
+        return url.replace(/%/g, '%25')
+            .replace(/#/g, '%23')
+            .replace(/\$/g, '%24')
+            .replace(/&/g, '%26')
+            .replace(/\+/g, '%2B')
+            .replace(/,/g, '%2C')
+            .replace(/\//g, '%2F')
+            .replace(/:/g, '%3A')
+            .replace(/=/g, '%3D')
+            .replace(/\?/g, '%3F')
+            .replace(/@/g, '%40')
+            .replace(/\[/g, '%5B')
+            .replace(/\\/g, '%5C')
+            .replace(/\]/g, '%5D')
+            .replace(/\^/g, '%5E')
+            .replace(/`/g, '%60')
+            .replace(/{/g, '%7B')
+            .replace(/}/g, '%7D');
+    }
+    var redirect = function () {
+        window.open(
+            BASE_URL.replace(
+                /%KW%/g,
+                encode(
+                    document.getElementById(
+                        'search_box'
+                    ).value
+                )
+            )
+        );
+    };
+    document.getElementById('search_btn').onclick = redirect;
+    document.body.onkeypress = function () {
+        if (event.keyCode == 13) {
+            redirect();
+        }
+    };
+</script>
+
+</html>
